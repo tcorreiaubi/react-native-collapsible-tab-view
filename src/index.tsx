@@ -1,4 +1,8 @@
-import { MaterialTabBarProps, MaterialTabItemProps } from './MaterialTabBar'
+import {
+  MaterialTabBarProps,
+  MaterialTabItemProps,
+  MaterialTabItem,
+} from './MaterialTabBar'
 import {
   TabBarProps,
   CollapsibleProps,
@@ -13,8 +17,11 @@ export type {
   ContainerRef,
   MaterialTabBarProps,
   MaterialTabItemProps,
+  MaterialTabItem,
 }
 
 export { default as createCollapsibleTabs } from './createCollapsibleTabs'
 
 export { default as MaterialTabBar } from './MaterialTabBar'
+
+export { default as createCollapsibleNavigator } from './Navigator'

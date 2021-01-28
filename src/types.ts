@@ -9,15 +9,19 @@ import {
 } from 'react-native'
 import Animated from 'react-native-reanimated'
 
-import { MaterialTabBarProps } from './MaterialTabBar'
-
 export type ContainerRef = FlatList<any>
 
 export type RefComponent = FlatList<any> | ScrollView
 
 export type Ref = React.RefObject<RefComponent>
 
-export type TabBarProps<T extends string> = {
+export type ParamList = string | number | symbol
+
+export type RefType<T extends ParamList> =
+  | { setIndex: (name: T, force?: boolean) => void }
+  | undefined
+
+export type TabBarProps<T extends ParamList> = {
   indexDecimal: Animated.SharedValue<number>
   focusedTab: Animated.SharedValue<T>
   refMap: Record<T, Ref>
@@ -26,11 +30,9 @@ export type TabBarProps<T extends string> = {
   onTabPress: (name: T) => void
 }
 
-export type CollapsibleProps<
-  T extends string,
-  TP extends TabBarProps<T> = MaterialTabBarProps<T>
-> = {
+export type CollapsibleProps<T extends ParamList> = {
   initialTabName?: T
+  // index?: Animated.SharedValue<number>
   containerRef: React.RefObject<ContainerRef>
   headerHeight?: number
   tabBarHeight?: number
@@ -38,15 +40,14 @@ export type CollapsibleProps<
   diffClampEnabled?: boolean
   snapThreshold?: number
   children: React.ReactElement[]
-  HeaderComponent?: React.JSXElementConstructor<TabBarProps<T>>
-  TabBarComponent?: React.JSXElementConstructor<TabBarProps<T>>
+  HeaderComponent?: (props: TabBarProps<T>) => React.ReactElement
+  TabBarComponent?: (props: TabBarProps<T>) => React.ReactElement
   refMap: Record<T, Ref>
   headerContainerStyle?: StyleProp<Animated.AnimateStyle<ViewStyle>>
-  containerStyle?: ViewStyle
+  containerStyle?: StyleProp<ViewStyle>
   cancelTranslation?: boolean
   lazy?: boolean
   cancelLazyFadeIn?: boolean
-  tabBarProps?: Omit<TP, keyof TabBarProps<any>>
   pagerProps?: Omit<
     RNFlatListProps<number>,
     | 'data'
@@ -57,10 +58,16 @@ export type CollapsibleProps<
     | 'onScroll'
     | 'showsHorizontalScrollIndicator'
     | 'getItemLayout'
-  >
+  > &
+    Partial<Pick<RNFlatListProps<unknown>, 'renderItem'>>
+  onIndexChange?: (data: {
+    target: T
+    isAlreadyFocused: boolean
+    index: number
+  }) => void
 }
 
-export type ContextType<T extends string> = {
+export type ContextType<T extends ParamList> = {
   headerHeight: number
   tabBarHeight: number
   snapEnabled: boolean
@@ -83,18 +90,20 @@ export type ContextType<T extends string> = {
   isGliding: Animated.SharedValue<boolean>
   isSnapping: Animated.SharedValue<boolean>
   snappingTo: Animated.SharedValue<number>
+  onTabPress: (name: T) => void
+  forceSync: Animated.SharedValue<'none' | 'active' | 'after'>
 }
 
-export type TabProps<T extends string> = {
+export type TabProps<T extends ParamList> = {
   name: T
 }
 
-export type ScrollViewProps<T extends string> = ComponentProps<
+export type ScrollViewProps<T extends ParamList> = ComponentProps<
   typeof Animated.ScrollView
 > &
   TabProps<T>
 
-export type FlatListProps<R extends any, T extends string> = Omit<
+export type FlatListProps<R extends any, T extends ParamList> = Omit<
   ComponentProps<typeof FlatList>,
   'renderItem'
 > &
