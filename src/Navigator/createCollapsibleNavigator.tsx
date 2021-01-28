@@ -143,8 +143,6 @@ function createCollapsibleNavigator<T extends ParamListBase>() {
       ref.current?.setIndex(name, true)
     }, [])
 
-    // console.log(descriptors)
-
     useAnimatedReaction(
       () => {
         return len.value
