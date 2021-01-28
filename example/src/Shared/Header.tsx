@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { TabBarProps } from 'react-native-collapsible-tab-view'
 
 type Props = {
   title: string
@@ -17,8 +16,8 @@ const Header: React.FC<Props> = ({ title, height = HEADER_HEIGHT }) => {
   )
 }
 
-function buildHeader<T extends TabBarProps<any>>(title: string) {
-  const NewHeader: React.FC<T> = () => {
+function buildHeader(title: string) {
+  const NewHeader = (): React.ReactElement => {
     return <Header title={title} />
   }
 

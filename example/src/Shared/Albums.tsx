@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Image, Dimensions, StyleSheet, View } from 'react-native'
 
 import Tabs from './Tabs'
+import TabsNavigator from './TabsNavigator'
 
 const COVERS = [
   require('../../assets/album-art-1.jpg'),
@@ -14,7 +15,7 @@ const COVERS = [
   require('../../assets/album-art-8.jpg'),
 ]
 
-const albumsContent = (n = 8) =>
+export const albumsContent = (n = 8) =>
   [...COVERS.filter((_e, i) => i < n)].map((source, i) => (
     // eslint-disable-next-line react/no-array-index-key
     <Image key={i} source={source} style={styles.cover} />
@@ -33,6 +34,21 @@ export default class Albums extends React.Component {
     )
   }
 }
+
+class AlbumsScreen extends React.Component {
+  render() {
+    return (
+      <TabsNavigator.ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.content}
+      >
+        <View style={styles.content}>{albumsContent()}</View>
+      </TabsNavigator.ScrollView>
+    )
+  }
+}
+
+export { AlbumsScreen }
 
 const styles = StyleSheet.create({
   container: {
