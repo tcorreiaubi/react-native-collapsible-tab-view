@@ -124,8 +124,7 @@ const ListEmptyComponent = () => {
 
 const Contacts: React.FC<{ emptyContacts?: boolean }> = ({ emptyContacts }) => {
   return (
-    <Tabs.FlatList<Item>
-      name="contacts"
+    <Tabs.FlatList
       data={emptyContacts ? [] : CONTACTS}
       keyExtractor={(_, i) => String(i)}
       renderItem={renderItem}

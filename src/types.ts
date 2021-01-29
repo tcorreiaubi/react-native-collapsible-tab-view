@@ -94,19 +94,11 @@ export type ContextType<T extends ParamList> = {
   forceSync: Animated.SharedValue<'none' | 'active' | 'after'>
 }
 
-export type TabProps<T extends ParamList> = {
-  name: T
-}
+export type ScrollViewProps = ComponentProps<typeof Animated.ScrollView>
 
-export type ScrollViewProps<T extends ParamList> = ComponentProps<
-  typeof Animated.ScrollView
-> &
-  TabProps<T>
-
-export type FlatListProps<R extends any, T extends ParamList> = Omit<
+export type FlatListProps<R extends any> = Omit<
   ComponentProps<typeof FlatList>,
   'renderItem'
-> &
-  TabProps<T> & {
-    renderItem: ListRenderItem<R>
-  }
+> & {
+  renderItem: ListRenderItem<R>
+}
