@@ -94,7 +94,7 @@ export type ContextType<T extends ParamList> = {
   forceSync: Animated.SharedValue<'none' | 'active' | 'after'>
 }
 
-export type ScrollViewProps = ComponentProps<typeof Animated.ScrollView>
+export type ScrollViewProps = ComponentProps<typeof ScrollView>
 
 export type FlatListProps<R extends any> = Omit<
   ComponentProps<typeof FlatList>,
