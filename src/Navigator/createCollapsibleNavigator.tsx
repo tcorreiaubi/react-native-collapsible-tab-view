@@ -31,7 +31,17 @@ import {
   TabOptionsContext,
 } from './types'
 
-function createCollapsibleNavigator<T extends ParamListBase>() {
+// TODO: typing
+type CollapsibleNavigator = {
+  Navigator: any
+  Screen: any
+  FlatList: any
+  ScrollView: any
+  useTabsContext: any
+  useTabOptionsContext: any
+}
+
+function createCollapsibleNavigator<T extends ParamListBase>(): CollapsibleNavigator {
   const {
     FlatList,
     ScrollView,
