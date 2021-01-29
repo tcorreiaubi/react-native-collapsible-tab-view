@@ -4,12 +4,10 @@ import {
   RefComponent,
   ContainerRef,
   createCollapsibleTabs,
-  TabBarProps as TabProps,
 } from 'react-native-collapsible-tab-view'
 import { useAnimatedRef } from 'react-native-reanimated'
 
 type TabNames = 'A' | 'B'
-type HeaderProps = TabProps<TabNames>
 
 const { useTabsContext, ...Tabs } = createCollapsibleTabs<TabNames>()
 
@@ -63,7 +61,7 @@ const ScreenA = () => {
   )
 }
 
-const Header: React.FC<HeaderProps> = () => {
+const Header = () => {
   return <View style={styles.header} />
 }
 
