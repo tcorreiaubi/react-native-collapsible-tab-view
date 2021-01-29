@@ -7,11 +7,9 @@ import {
   TabNavigationState,
   createNavigatorFactory,
   ParamListBase,
-  useRoute,
   useTheme,
 } from '@react-navigation/native'
 import * as React from 'react'
-import { ListRenderItem } from 'react-native'
 import {
   runOnJS,
   useAnimatedReaction,
@@ -35,8 +33,8 @@ import {
 
 function createCollapsibleNavigator<T extends ParamListBase>() {
   const {
-    FlatList: RawFlatList,
-    ScrollView: RawScrollView,
+    FlatList,
+    ScrollView,
     Container,
     useTabsContext,
   } = createCollapsibleTabs<keyof T>()
@@ -232,23 +230,6 @@ function createCollapsibleNavigator<T extends ParamListBase>() {
   >(RawNavigator)
 
   const { Navigator, Screen } = factory<T>()
-
-  function FlatList<R extends any>(
-    props: Omit<
-      React.ComponentProps<typeof RawFlatList>,
-      'name' | 'renderItem'
-    > & { renderItem: ListRenderItem<R> }
-  ): React.ReactElement {
-    const { name } = useRoute()
-    return <RawFlatList<R> name={name} {...props} />
-  }
-
-  const ScrollView: React.FC<
-    Omit<React.ComponentProps<typeof RawScrollView>, 'name'>
-  > = (props) => {
-    const { name } = useRoute()
-    return <RawScrollView name={name} {...props} />
-  }
 
   return {
     Navigator,
