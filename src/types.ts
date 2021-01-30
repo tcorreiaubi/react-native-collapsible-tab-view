@@ -92,6 +92,7 @@ export type ContextType<T extends ParamList> = {
   snappingTo: Animated.SharedValue<number>
   onTabPress: (name: T) => void
   forceSync: Animated.SharedValue<'none' | 'active' | 'after'>
+  endDrag: Animated.SharedValue<number>
 }
 
 export type ScrollViewProps = ComponentProps<typeof ScrollView>
