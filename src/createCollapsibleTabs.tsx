@@ -112,6 +112,7 @@ const createCollapsibleTabs = <T extends ParamList>() => {
         return tabNames.value[index.value]
       })
       const isGliding = useSharedValue(false)
+      const calculateNextOffset = useSharedValue(index.value)
       const forceSync = useSharedValue<'none' | 'after' | 'active'>('none')
       const nextForceSync = useSharedValue<false | T>(false)
 
@@ -160,11 +161,7 @@ const createCollapsibleTabs = <T extends ParamList>() => {
         },
         (nextIndex) => {
           if (nextIndex !== null && nextIndex !== index.value) {
-            offset.value =
-              scrollY.value[index.value] -
-              scrollY.value[nextIndex] +
-              offset.value
-            index.value = nextIndex
+            calculateNextOffset.value = nextIndex
             if (onIndexChange) {
               runOnJS(onIndexChange)({
                 index: nextIndex,
@@ -175,6 +172,19 @@ const createCollapsibleTabs = <T extends ParamList>() => {
           }
         },
         [onIndexChange]
+      )
+
+      useAnimatedReaction(
+        () => {
+          return calculateNextOffset.value
+        },
+        (i) => {
+          if (i !== index.value) {
+            offset.value =
+              scrollY.value[index.value] - scrollY.value[i] + offset.value
+            index.value = i
+          }
+        }
       )
 
       const scrollHandlerX = useAnimatedScrollHandler(
@@ -305,9 +315,7 @@ const createCollapsibleTabs = <T extends ParamList>() => {
             forceSync.value === 'after'
           ) {
             const i = tabNames.value.findIndex((n) => n === name)
-            offset.value =
-              scrollY.value[index.value] - scrollY.value[i] + offset.value
-            index.value = i
+            calculateNextOffset.value = i
             if (name === focusedTab.value) {
               // @ts-ignore
               if (refMap[name].current?.scrollTo) {
