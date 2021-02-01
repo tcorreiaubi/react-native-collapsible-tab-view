@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native'
 
-// import CenteredEmptyList from './CenteredEmptyList'
+import CenteredEmptyList from './CenteredEmptyList'
 import CollpasedHeaderHeight from './CollpasedHeaderHeight'
 import Default from './Default'
 import DiffClamp from './DiffClamp'
@@ -35,7 +35,7 @@ const EXAMPLE_COMPONENTS: ExampleComponentType[] = [
   DiffClampSnap,
   Lazy,
   ScrollableTabs,
-  // CenteredEmptyList,
+  CenteredEmptyList,
   ScrollOnHeader,
   QuickStartDemo,
   UndefinedHeaderHeight,
