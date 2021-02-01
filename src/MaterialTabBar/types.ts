@@ -24,11 +24,13 @@ export type MaterialTabItemProps<T extends ParamList> = {
     name: T
     indexDecimal: Animated.SharedValue<number>
   }>
-  style?: ViewStyle
+  style?: StyleProp<ViewStyle>
   labelStyle?: AnimatedTextStyle
   inactiveOpacity?: number
   pressColor?: string
   pressOpacity?: number
+  activeColor?: string
+  inactiveColor?: string
 } & Omit<PressableProps, 'onPress' | 'children'>
 
 export type MaterialTabBarProps<N extends ParamList> = TabBarProps<N> & {
@@ -37,6 +39,11 @@ export type MaterialTabBarProps<N extends ParamList> = TabBarProps<N> & {
   TabItemComponent?: (props: MaterialTabItemProps<N>) => React.ReactElement
   getLabelText?: (name: N) => string
   style?: StyleProp<ViewStyle>
+  contentContainerStyle?: StyleProp<ViewStyle>
+  tabStyle?: StyleProp<ViewStyle>
+  labelStyle?: AnimatedTextStyle
+  activeColor?: string
+  inactiveColor?: string
 }
 
 export type ItemLayout = {

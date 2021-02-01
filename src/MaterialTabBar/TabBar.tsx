@@ -30,6 +30,11 @@ const TabBar: React.FC<MaterialTabBarProps<any>> = ({
   getLabelText = (name) => name.toUpperCase(),
   onTabPress,
   style,
+  contentContainerStyle,
+  labelStyle,
+  inactiveColor,
+  activeColor,
+  tabStyle,
 }) => {
   const tabBarRef = useAnimatedRef<Animated.ScrollView>()
   const windowWidth = useWindowDimensions().width
@@ -136,6 +141,7 @@ const TabBar: React.FC<MaterialTabBarProps<any>> = ({
       contentContainerStyle={[
         styles.contentContainer,
         !scrollEnabled && { width: windowWidth },
+        contentContainerStyle,
       ]}
       keyboardShouldPersistTaps="handled"
       bounces={false}
@@ -158,6 +164,10 @@ const TabBar: React.FC<MaterialTabBarProps<any>> = ({
             onLayout={scrollEnabled ? onTabItemLayout : undefined}
             scrollEnabled={scrollEnabled}
             indexDecimal={indexDecimal}
+            labelStyle={labelStyle}
+            activeColor={activeColor}
+            inactiveColor={inactiveColor}
+            style={tabStyle}
           />
         )
       })}

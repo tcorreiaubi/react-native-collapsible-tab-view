@@ -16,6 +16,7 @@
 - [API reference](#api-reference)
   - [createCollapsibleTabs](#createcollapsibletabs)
   - [Tabs.Container](#tabscontainer)
+  - [MaterialTabBar](#materialtabbar)
   - [Tabs.ScrollView and Tabs.FlatList](#tabsscrollview-and-tabsflatlist)
   - [useTabsContext](#usetabscontext)
 - [Contributing](#contributing)
@@ -264,6 +265,68 @@ const Example: React.FC<Props> = () => {
 | `cancelLazyFadeIn?`     | Cancel the fade in animation if `lazy={true}`                                                    | `false`          |
 | `tabBarProps?`          | Props passed to the `TabBarComponent`.                                                           |                  |
 | `pagerProps?`           | Props passed to the horizontal FlatList.                                                         |                  |
+
+### `MaterialTabBar`
+
+Basic usage looks like this:
+
+```tsx
+import {
+  RefComponent,
+  ContainerRef,
+  TabBarProps,
+} from 'react-native-collapsible-tab-view'
+import { useAnimatedRef } from 'react-native-reanimated'
+
+type MyTabs = 'article' | 'contacts' | 'albums'
+
+const MyHeader: React.FC<TabBarProps<MyTabs>> = (props) => {...}
+
+const Example: React.FC<Props> = () => {
+  const containerRef = useAnimatedRef<ContainerRef>();
+  const tab0Ref = useAnimatedRef<RefComponent>();
+  const tab1Ref = useAnimatedRef<RefComponent>();
+
+  const [refMap] = React.useState({
+    tab0: tab0Ref,
+    tab1: tab1Ref,
+  });
+
+  return (
+    <Tabs.Container
+      containerRef={containerRef}
+      HeaderComponent={MyHeader}
+      headerHeight={HEADER_HEIGHT} // optional
+      refMap={refMap}
+      TabBarComponent={(props) => (
+        <MaterialTabBar
+          {...props}
+          activeColor="red"
+          inactiveColor="yellow"
+          labelStyle={{ fontSize: 14 }}
+        />
+      )}
+    >
+      {/* components returning Tabs.ScrollView || Tabs.FlatList */}
+    </Tabs.Container>
+  );
+};
+```
+
+#### Props
+
+| prop                    | description                                                                                           | default                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------- |
+| `scrollEnabled`         | Indicates whether the tab bar should contain horizontal scroll, when enabled the tab width is dynamic | false                        |
+| `indicatorStyle`        | Style to apply to the active indicator.                                                               |                              |
+| `activeColor`           | Color applied to the label when active                                                                |                              |
+| `inactiveColor`         | Color applied to the label when inactive                                                              |                              |
+| `labelStyle`            | Style to apply to the tab item label                                                                  |                              |
+| `tabStyle`              | Style to apply to the individual tab items in the tab bar.                                            |                              |
+| `style`                 | Style to apply to the tab bar container.                                                              |                              |
+| `contentContainerStyle` | Style to apply to the inner container for tabs                                                        |                              |
+| `getLabelText`          | Function to compute the tab item label text                                                           | (name) => name.toUpperCase() |
+| `TabItemComponent`      | React component to render as tab bar item                                                             | MaterialTabItemProps         |
 
 ### `Tabs.ScrollView` and `Tabs.FlatList`
 

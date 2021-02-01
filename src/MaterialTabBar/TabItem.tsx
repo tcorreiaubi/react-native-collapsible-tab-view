@@ -8,6 +8,7 @@ import Animated, {
 import { MaterialTabItemProps } from './types'
 
 export const TABBAR_HEIGHT = 48
+const DEFAULT_COLOR = 'rgba(0, 0, 0, 1)'
 
 const TabItem: React.FC<MaterialTabItemProps<any>> = ({
   name,
@@ -19,6 +20,8 @@ const TabItem: React.FC<MaterialTabItemProps<any>> = ({
   label,
   style,
   labelStyle,
+  activeColor = DEFAULT_COLOR,
+  inactiveColor = DEFAULT_COLOR,
   inactiveOpacity = 0.7,
   pressColor = '#DDDDDD',
   pressOpacity = Platform.OS === 'ios' ? 0.2 : 1,
@@ -32,6 +35,10 @@ const TabItem: React.FC<MaterialTabItemProps<any>> = ({
         [inactiveOpacity, 1, inactiveOpacity],
         Animated.Extrapolate.CLAMP
       ),
+      color:
+        Math.abs(index - indexDecimal.value) < 0.5
+          ? activeColor
+          : inactiveColor,
     }
   })
 
