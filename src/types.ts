@@ -46,6 +46,7 @@ export type CollapsibleProps<T extends ParamList> = {
   initialTabName?: T
   containerRef: React.RefObject<ContainerRef>
   headerHeight?: number
+  collapsedHeaderHeight?: number
   tabBarHeight?: number
   snapEnabled?: boolean
   diffClampEnabled?: boolean
@@ -75,6 +76,7 @@ export type CollapsibleProps<T extends ParamList> = {
 
 export type ContextType<T extends ParamList> = {
   headerHeight: number
+  headerScrollDistance: number
   tabBarHeight: number
   snapEnabled: boolean
   diffClampEnabled: boolean

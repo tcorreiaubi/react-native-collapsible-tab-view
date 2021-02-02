@@ -327,6 +327,7 @@ const Example: React.FC<Props> = () => {
 | `contentContainerStyle` | Style to apply to the inner container for tabs                                                        |                              |
 | `getLabelText`          | Function to compute the tab item label text                                                           | (name) => name.toUpperCase() |
 | `TabItemComponent`      | React component to render as tab bar item                                                             | MaterialTabItemProps         |
+| `collapsedHeaderHeight` | Header height when collpased                                                                          | 0                            |
 
 ### `Tabs.ScrollView` and `Tabs.FlatList`
 

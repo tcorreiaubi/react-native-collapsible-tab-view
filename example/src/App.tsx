@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 
 // import CenteredEmptyList from './CenteredEmptyList'
+import CollpasedHeaderHeight from './CollpasedHeaderHeight'
 import Default from './Default'
 import DiffClamp from './DiffClamp'
 import DiffClampSnap from './DiffClampSnap'
@@ -41,6 +42,7 @@ const EXAMPLE_COMPONENTS: ExampleComponentType[] = [
   StartOnSpecificTab,
   Ref,
   OnIndexChange,
+  CollpasedHeaderHeight,
 ]
 
 const ExampleList: React.FC<object> = () => {
