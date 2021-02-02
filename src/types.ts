@@ -97,7 +97,7 @@ export type CollapsibleProps<T extends ParamList> = {
 
 export type ContextType<T extends ParamList> = {
   headerHeight: number
-  headerScrollDistance: number
+  headerScrollDistance: Animated.SharedValue<number>
   tabBarHeight: number
   snapEnabled: boolean
   diffClampEnabled: boolean
