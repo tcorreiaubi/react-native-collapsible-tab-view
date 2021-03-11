@@ -18,7 +18,8 @@
     "example": "yarn --cwd example",
     "bootstrap": "yarn example && yarn",
     "prepack": "bob build",
-    "docs": "ts-node ./documentation/buildDocs.ts"
+    "docs": "ts-node ./documentation/buildDocs.ts",
+    "install": "yarn build"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
