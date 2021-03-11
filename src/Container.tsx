@@ -63,6 +63,7 @@ export const Container = React.memo(
         snapThreshold,
         children,
         HeaderComponent,
+        renderHeader,
         TabBarComponent = MaterialTabBar,
         headerContainerStyle,
         cancelTranslation,
@@ -489,6 +490,16 @@ export const Container = React.memo(
                     tabProps={tabProps}
                   />
                 )}
+                {renderHeader &&
+                  renderHeader({
+                    containerRef,
+                    index,
+                    tabNames: tabNamesArray,
+                    focusedTab,
+                    indexDecimal,
+                    onTabPress,
+                    tabProps,
+                  })}
               </View>
               <View
                 style={[styles.container, styles.tabBarContainer]}
