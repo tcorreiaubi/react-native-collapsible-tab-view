@@ -478,17 +478,7 @@ export const Container = React.memo(
                 onLayout={getHeaderHeight}
                 pointerEvents="box-none"
               >
-                {HeaderComponent && (
-                  <HeaderComponent
-                    containerRef={containerRef}
-                    index={index}
-                    tabNames={tabNamesArray}
-                    focusedTab={focusedTab}
-                    indexDecimal={indexDecimal}
-                    onTabPress={onTabPress}
-                    tabProps={tabProps}
-                  />
-                )}
+                {HeaderComponent && HeaderComponent}
               </View>
               <View
                 style={[styles.container, styles.tabBarContainer]}

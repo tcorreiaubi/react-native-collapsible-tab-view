@@ -79,7 +79,7 @@ export type CollapsibleProps = {
    */
   snapThreshold?: number | null
   children: TabReactElement<TabName>[] | TabReactElement<TabName>
-  HeaderComponent?: (props: TabBarProps<TabName>) => React.ReactElement | null
+  HeaderComponent?: React.ReactElement | null
   TabBarComponent?: (props: TabBarProps<TabName>) => React.ReactElement | null
   headerContainerStyle?: StyleProp<Animated.AnimateStyle<ViewStyle>>
   containerStyle?: StyleProp<ViewStyle>
